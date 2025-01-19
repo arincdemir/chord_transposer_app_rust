@@ -8,6 +8,7 @@ var filesToCache = [
 
 /* Start the service worker and cache all of the app's content */
 self.addEventListener('install', function (e) {
+  //self.skipWaiting(); // Forces the new service worker to activate immediately
   e.waitUntil(
     caches.open(cacheName).then(function (cache) {
       return cache.addAll(filesToCache);

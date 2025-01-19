@@ -99,7 +99,7 @@ impl eframe::App for TemplateApp {
 fn powered_by_egui_and_eframe(ui: &mut egui::Ui) {
     ui.horizontal(|ui| {
         ui.spacing_mut().item_spacing.x = 0.0;
-        ui.label("Powered by ");
+        ui.label("Created with Rust, powered by ");
         ui.hyperlink_to("egui", "https://github.com/emilk/egui");
         ui.label(" and ");
         ui.hyperlink_to(
@@ -136,6 +136,25 @@ impl eframe::App for ChordTransposerApp {
     }
 
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
+            // The top panel is often a good place for a menu bar:
+
+            egui::menu::bar(ui, |ui| {
+                // NOTE: no File->Quit on web pages!
+                let is_web = cfg!(target_arch = "wasm32");
+                if !is_web {
+                    ui.menu_button("File", |ui| {
+                        if ui.button("Quit").clicked() {
+                            ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+                        }
+                    });
+                    ui.add_space(16.0);
+                }
+
+                egui::widgets::global_theme_preference_buttons(ui);
+            });
+        });
+
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("Chord Transposer!");
 
@@ -184,6 +203,15 @@ impl eframe::App for ChordTransposerApp {
             if slider_changed || text_changed {
                 self.update_transposed_text();
             }
+
+            ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
+                powered_by_egui_and_eframe(ui);
+                egui::warn_if_debug_build(ui);
+                ui.add(egui::github_link_file!(
+                    "https://github.com/emilk/eframe_template/blob/main/", //TODO add my github link
+                    "Source code."
+                ));
+            });
         });
     }
 }
