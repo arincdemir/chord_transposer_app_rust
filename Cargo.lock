@@ -663,6 +663,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "chord_transposer_rust"
+version = "0.1.0"
+dependencies = [
+ "eframe",
+ "egui",
+ "env_logger",
+ "log",
+ "serde",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
+
+[[package]]
 name = "clipboard-win"
 version = "4.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -885,19 +898,6 @@ dependencies = [
  "winapi",
  "windows-sys 0.59.0",
  "winit",
-]
-
-[[package]]
-name = "eframe_template"
-version = "0.1.0"
-dependencies = [
- "eframe",
- "egui",
- "env_logger",
- "log",
- "serde",
- "wasm-bindgen-futures",
- "web-sys",
 ]
 
 [[package]]
