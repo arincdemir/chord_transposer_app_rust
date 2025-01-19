@@ -149,7 +149,10 @@ jobs:
     - name: Build
       run: |
         cross build --verbose --release --target=${{ matrix.TARGET }}
-
+        
+    - name: List build artifacts
+      run: ls -R target/${{ matrix.TARGET }}/release
+      
     - name: Rename
       run: cp target/${{ matrix.TARGET }}/release/chord_transposer_rust${{ matrix.EXTENSION }} chord_trasposer_rust-${{ matrix.TARGET }}${{ matrix.EXTENSION }}
 
