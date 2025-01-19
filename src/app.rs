@@ -83,8 +83,12 @@ impl eframe::App for TemplateApp {
 
             ui.separator();
 
+            ui.hyperlink_to(
+                "Source code.",
+                "https://github.com/arincdemir/chord_transposer_rust",
+            );
             ui.add(egui::github_link_file!(
-                "https://github.com/emilk/eframe_template/blob/main/",
+                "https://github.com/arincdemir/chord_transposer_rust",
                 "Source code."
             ));
 
@@ -207,10 +211,10 @@ impl eframe::App for ChordTransposerApp {
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
                 powered_by_egui_and_eframe(ui);
                 egui::warn_if_debug_build(ui);
-                ui.add(egui::github_link_file!(
-                    "https://github.com/emilk/eframe_template/blob/main/", //TODO add my github link
-                    "Source code."
-                ));
+                ui.hyperlink_to(
+                    "Source code.",
+                    "https://github.com/arincdemir/chord_transposer_rust",
+                );
             });
         });
     }
